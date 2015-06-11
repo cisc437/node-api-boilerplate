@@ -1,0 +1,11 @@
+{
+  "name": "simple-REST-api",
+  "version": "0.0.1",
+  "description": "A JSON-in JSON-out API starter kit",
+  "main": "server.js",
+  "repository": "",
+  "author": "Andy Novocin <andy@novocin.com>",
+  "dependencies": {
+    "express": "4.x"
+  }
+}
