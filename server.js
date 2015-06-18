@@ -1,11 +1,30 @@
 var http = require('http');
 var express = require('express');
+var mysql = require('mysql');
 
 var router = express();
 var server = http.createServer(router);
 
+var USERNAME = "andynovo";
+var PORT = "47476";
+var PWD = USERNAME.split('').reverse().join('');
+
+var con = mysql.createConnection({
+  host : "orioles1",
+  user : USERNAME,
+  password : PWD,
+  database : USERNAME
+});
+
 router.get('/', function(req, res){
-  res.json({andy:"rules"});
+  con.connect();
+  con.query("Select * from bananas", function(err, rows, fields){
+    if (!err){
+      res.json(rows);
+    } else {
+      res.json({error: "SQL failed"});
+    }
+  });
 });
 
 router.route('/news/:newsid')
@@ -24,7 +43,7 @@ router.post('/news/', function(req, res){
 });
 
 
-server.listen(process.env.PORT || 3000, process.env.IP || "0.0.0.0", function(){
+server.listen(PORT || 3000, process.env.IP || "0.0.0.0", function(){
   var addr = server.address();
   console.log("Chat server listening at", addr.address + ":" + addr.port);
 });
