@@ -16,8 +16,9 @@ var con = mysql.createConnection({
   database : USERNAME
 });
 
+con.connect();
+
 router.get('/', function(req, res){
-  con.connect();
   con.query("Select * from bananas", function(err, rows, fields){
     if (!err){
       res.json(rows);
